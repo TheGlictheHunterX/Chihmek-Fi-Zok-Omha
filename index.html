@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riko Leak - Data Breach Repository</title>
+    <style>
+        /* Global Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #00ff00;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 0, 0.02) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 0, 0.02) 0%, transparent 20%);
+        }
+        
+        /* Terminal-like Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #00ff00;
+            border-radius: 4px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #000;
+            border-bottom: 1px solid #00ff00;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 0 0 5px #00ff00;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: #ff0000;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: #00ff00;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+        }
+        
+        nav ul li a:hover {
+            border: 1px solid #00ff00;
+            background-color: rgba(0, 255, 0, 0.1);
+        }
+        
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .terminal {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #00ff00;
+        }
+        
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        
+        .terminal-btn.red {
+            background-color: #ff5f56;
+        }
+        
+        .terminal-btn.yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .terminal-btn.green {
+            background-color: #27c93f;
+        }
+        
+        .terminal-title {
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .terminal-body {
+            min-height: 100px;
+        }
+        
+        .command-line {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        
+        .prompt {
+            color: #00ff00;
+            margin-right: 0.5rem;
+        }
+        
+        .output {
+            margin-bottom: 1rem;
+            color: #cccccc;
+        }
+        
+        /* Data Grid Styles */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .data-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        .data-card h3 {
+            color: #ff0000;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        
+        .data-card p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .data-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+        
+        .get-data-btn {
+            background-color: #ff0000;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .get-data-btn:hover {
+            background-color: #990000;
+            color: #fff;
+        }
+        
+        .fbi-section {
+            margin-top: 3rem;
+            border-top: 1px solid #ff0000;
+            padding-top: 2rem;
+        }
+        
+        .fbi-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .fbi-badge {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .fbi-wanted {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .fbi-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .fbi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .fbi-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .fbi-card h4 {
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+        
+        .fbi-card p {
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #000;
+            border-top: 1px solid #00ff00;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        footer p {
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Riko<span>Leak</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#breaches">Data Breaches</a></li>
+                <li><a href="#fbi">FBI Wanted</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container" id="home">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-btn red"></div>
+                <div class="terminal-btn yellow"></div>
+                <div class="terminal-btn green"></div>
+                <div class="terminal-title">root@rikoleak:~</div>
+            </div>
+            <div class="terminal-body">
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="output">Welcome to Riko Leak</span>
+                </div>
+                <div class="output">
+                    <p>Data breach repository - Free downloads</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 id="breaches">Latest Data Breaches</h2>
+        <div class="data-grid">
+            <div class="data-card">
+                <h3>Adnanaswad.ae - Emirates Company</h3>
+                <p>Complete database dump from Adnanaswad.ae including employee records, financial data, and internal documents.</p>
+                <div class="data-meta">
+                    <span>Uploaded: 2023-11-20</span>
+                    <span>Size: 78MB</span>
+                </div>
+                <button class="get-data-btn" onclick="downloadData('https://files.catbox.moe/ku5m2n.zip')">GET DATA</button>
+            </div>
+            
+            <div class="data-card">
+                <h3>Otosource.org - Organization Data</h3>
+                <p>Full database export from Otosource.org containing user accounts, transaction records, and internal communications.</p>
+                <div class="data-meta">
+                    <span>Uploaded: 2023-11-18</span>
+                    <span>Size: 112MB</span>
+                </div>
+                <button class="get-data-btn" onclick="downloadData('https://files.catbox.moe/6mg3nq.zip')">GET DATA</button>
+            </div>
+        </div>
+        
+        <div class="fbi-section" id="fbi">
+            <div class="fbi-header">
+                <span class="fbi-badge">FBI</span>
+                <h2>Most Wanted Cyber Criminals</h2>
+            </div>
+            
+            <div class="fbi-wanted">
+                <div class="fbi-card">
+                    <img src="https://www.fbi.gov/wanted/cyber/@@images/image/large" alt="Cyber Criminal">
+                    <h4>ALEXANDER VINNIK</h4>
+                    <p>BTC-e Cryptocurrency Exchange</p>
+                    <p>Wanted for: Money Laundering</p>
+                </div>
+                
+                <div class="fbi-card">
+                    <img src="https://www.fbi.gov/wanted/cyber/@@images/image/large" alt="Cyber Criminal">
+                    <h4>NIKOLAY MOLOTKOV</h4>
+                    <p>Ransomware Attacks</p>
+                    <p>Wanted for: Cyber Extortion</p>
+                </div>
+                
+                <div class="fbi-card">
+                    <img src="https://www.fbi.gov/wanted/cyber/@@images/image/large" alt="Cyber Criminal">
+                    <h4>MATEUSZ SMAGA</h4>
+                    <p>International Hacking</p>
+                    <p>Wanted for: Computer Fraud</p>
+                </div>
+                
+                <div class="fbi-card">
+                    <img src="https://www.fbi.gov/wanted/cyber/@@images/image/large" alt="Cyber Criminal">
+                    <h4>DANIEL KAYI</h4>
+                    <p>Banking Malware</p>
+                    <p>Wanted for: Bank Fraud</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 id="about">About Riko Leak</h2>
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-btn red"></div>
+                <div class="terminal-btn yellow"></div>
+                <div class="terminal-btn green"></div>
+                <div class="terminal-title">about@rikoleak:~</div>
+            </div>
+            <div class="terminal-body">
+                <div class="output">
+                    <p>Riko Leak is a data breach repository established in 2023.</p>
+                    <p>We provide free access to important data leaks for research purposes.</p>
+                    <p>All data is provided as-is without warranty.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Riko Leak &copy; 2023 | Access only through secure networks</p>
+    </footer>
+    
+    <script>
+        // Download function
+        function downloadData(url) {
+            window.open(url, '_blank');
+        }
+        
+        // Fetch real FBI wanted data (example - would need proper API in real implementation)
+        function fetchFBIWanted() {
+            // In a real implementation, you would fetch from FBI API
+            console.log("Fetching FBI most wanted data...");
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchFBIWanted();
+        });
+    </script>
+</body>
+</html>
