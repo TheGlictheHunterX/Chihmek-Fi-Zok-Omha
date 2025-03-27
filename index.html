@@ -572,111 +572,114 @@
         <p>TOR mirror: rikoleak.onion</p>
     </footer>
     
-    <script>
-        // Download function
-        function downloadData(url) {
-            window.open(url, '_blank');
-        }
-        
-        // Individual timers for each target with persistent time
-        function startIndividualTimers() {
-            // Initialize or retrieve start times from localStorage
-            const startTimes = {
-                timer1: localStorage.getItem('timer1Start') || Date.now(),
-                timer2: localStorage.getItem('timer2Start') || Date.now(),
-                timer3: localStorage.getItem('timer3Start') || Date.now(),
-                timer4: localStorage.getItem('timer4Start') || Date.now()
-            };
-            
-            // Store initial start times if they don't exist
-            for (const timerId in startTimes) {
-                if (!localStorage.getItem(timerId + 'Start')) {
-                    localStorage.setItem(timerId + 'Start', startTimes[timerId]);
-                }
+<script>
+// Download function
+function downloadData(url) {
+    window.open(url, '_blank');
+}
+
+// Function to format time starting from 1 hour
+function formatTimeFromStart(startTime) {
+    const now = new Date();
+    const diff = now - startTime;
+    const totalSeconds = Math.floor(diff / 1000) + 3600; // Add 1 hour (3600 seconds)
+    
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    return `Time since added: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// Initialize timers starting from 1 hour
+function startIndividualTimers() {
+    // Define the current time as start time for all timers
+    const startTime = new Date();
+    
+    // Update all timers every second
+    setInterval(() => {
+        for (let i = 1; i <= 4; i++) {
+            const timerElement = document.getElementById(`timer${i}`);
+            if (timerElement) {
+                timerElement.textContent = formatTimeFromStart(startTime);
             }
-            
-            // Update all timers every second
-            setInterval(() => {
-                for (const timerId in startTimes) {
-                    const timerElement = document.getElementById(timerId);
-                    if (timerElement) {
-                        const startTime = parseInt(localStorage.getItem(timerId + 'Start'));
-                        const elapsed = Math.floor((Date.now() - startTime) / 1000);
-                        const hours = Math.floor(elapsed / 3600);
-                        const minutes = Math.floor((elapsed % 3600) / 60);
-                        const seconds = elapsed % 60;
-                        
-                        timerElement.textContent = `Time since added: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    }
-                }
-            }, 1000);
         }
-        
-        // Red button functionality
-        function setupRedButton() {
-            const redButton = document.getElementById('red-btn');
-            redButton.addEventListener('click', () => {
-                downloadData('https://files.catbox.moe/xyv504.zip');
-            });
+    }, 1000);
+    
+    // Initial update
+    for (let i = 1; i <= 4; i++) {
+        const timerElement = document.getElementById(`timer${i}`);
+        if (timerElement) {
+            timerElement.textContent = `Time since added: 01:00:00`;
         }
+    }
+}
+
+// Red button functionality
+function setupRedButton() {
+    const redButton = document.getElementById('red-btn');
+    redButton.addEventListener('click', () => {
+        downloadData('https://files.catbox.moe/xyv504.zip');
+    });
+}
+
+// Matrix rain effect
+function setupMatrixRain() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'matrixCanvas';
+    document.getElementById('matrixRain').appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const nums = '0123456789';
+    
+    const alphabet = katakana + latin + nums;
+    
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    
+    const rainDrops = [];
+    
+    for (let x = 0; x < columns; x++) {
+        rainDrops[x] = 1;
+    }
+    
+    const draw = () => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // Matrix rain effect
-        function setupMatrixRain() {
-            const canvas = document.createElement('canvas');
-            canvas.id = 'matrixCanvas';
-            document.getElementById('matrixRain').appendChild(canvas);
+        ctx.fillStyle = '#00ff41';
+        ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < rainDrops.length; i++) {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
             
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-            const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const nums = '0123456789';
-            
-            const alphabet = katakana + latin + nums;
-            
-            const fontSize = 16;
-            const columns = canvas.width / fontSize;
-            
-            const rainDrops = [];
-            
-            for (let x = 0; x < columns; x++) {
-                rainDrops[x] = 1;
+            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                rainDrops[i] = 0;
             }
-            
-            const draw = () => {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = '#00ff41';
-                ctx.font = fontSize + 'px monospace';
-                
-                for (let i = 0; i < rainDrops.length; i++) {
-                    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                    ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-                    
-                    if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                        rainDrops[i] = 0;
-                    }
-                    rainDrops[i]++;
-                }
-            };
-            
-            setInterval(draw, 30);
-            
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
+            rainDrops[i]++;
         }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            startIndividualTimers();
-            setupRedButton();
-            setupMatrixRain();
-        });
-    </script>
+    };
+    
+    setInterval(draw, 30);
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    startIndividualTimers();
+    setupRedButton();
+    setupMatrixRain();
+});
+</script>
 </body>
 </html>
