@@ -578,22 +578,30 @@
             window.open(url, '_blank');
         }
         
-        // Individual timers for each target starting from 00:00:00
+        // Individual timers for each target with persistent time
         function startIndividualTimers() {
-            // Track start times for each timer
+            // Initialize or retrieve start times from localStorage
             const startTimes = {
-                timer1: Date.now(),
-                timer2: Date.now(),
-                timer3: Date.now(),
-                timer4: Date.now()
+                timer1: localStorage.getItem('timer1Start') || Date.now(),
+                timer2: localStorage.getItem('timer2Start') || Date.now(),
+                timer3: localStorage.getItem('timer3Start') || Date.now(),
+                timer4: localStorage.getItem('timer4Start') || Date.now()
             };
+            
+            // Store initial start times if they don't exist
+            for (const timerId in startTimes) {
+                if (!localStorage.getItem(timerId + 'Start')) {
+                    localStorage.setItem(timerId + 'Start', startTimes[timerId]);
+                }
+            }
             
             // Update all timers every second
             setInterval(() => {
                 for (const timerId in startTimes) {
                     const timerElement = document.getElementById(timerId);
                     if (timerElement) {
-                        const elapsed = Math.floor((Date.now() - startTimes[timerId]) / 1000);
+                        const startTime = parseInt(localStorage.getItem(timerId + 'Start'));
+                        const elapsed = Math.floor((Date.now() - startTime) / 1000);
                         const hours = Math.floor(elapsed / 3600);
                         const minutes = Math.floor((elapsed % 3600) / 60);
                         const seconds = elapsed % 60;
