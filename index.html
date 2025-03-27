@@ -434,7 +434,7 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#victims">Victims</a></li>
-                <li><a href="#fbi">FBI Wanted</a></li>
+                <li><a href="#groups">Ransomware Groups</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
         </nav>
@@ -455,7 +455,7 @@
                 </div>
                 <div class="output">
                     <p>Data breach repository - Free downloads</p>
-                    <p>Total leaks: 3 | Last updated: Today</p>
+                    <p>Total leaks: 4 | Last updated: Today</p>
                 </div>
             </div>
         </div>
@@ -494,41 +494,56 @@
                 <div class="target-timer" id="timer3">Time since added: 00:00:00</div>
                 <button class="get-data-btn" onclick="downloadData('https://files.catbox.moe/xyv504.zip')">DOWNLOAD LEAK</button>
             </div>
+            
+            <div class="data-card">
+                <h3>CityLink Express - Logistics Company</h3>
+                <p>Complete data breach of CityLink Express including customer databases, shipment records, financial transactions, and internal documents.</p>
+                <div class="data-meta">
+                    <span>Uploaded: 2023-11-25</span>
+                    <span>Size: 156MB</span>
+                </div>
+                <div class="target-timer" id="timer4">Time since added: 00:00:00</div>
+                <button class="get-data-btn" onclick="downloadData('https://files.catbox.moe/slc7an.zip')">DOWNLOAD LEAK</button>
+            </div>
         </div>
         
-        <div class="fbi-section" id="fbi">
+        <div class="fbi-section" id="groups">
             <div class="fbi-header">
-                <span class="fbi-badge">FBI</span>
-                <h2>Most Wanted Cyber Criminals</h2>
+                <span class="fbi-badge">TOP</span>
+                <h2>Ransomware Groups</h2>
             </div>
             
             <div class="fbi-wanted">
                 <div class="fbi-card">
-                    <img src="https://www.fbi.gov/wanted/cyber/@@images/image/large" alt="Cyber Criminal">
-                    <h4>ALEXANDER VINNIK</h4>
-                    <p>BTC-e Cryptocurrency Exchange</p>
-                    <p>Wanted for: Money Laundering</p>
+                    <img src="https://www.bleepstatic.com/content/hl-images/2021/06/02/LockBit.jpg" alt="LockBit">
+                    <h4>LOCKBIT</h4>
+                    <p>Most active ransomware group</p>
+                    <p>Specialty: Double extortion</p>
+                    <p>Victims: 1000+ organizations</p>
                 </div>
                 
                 <div class="fbi-card">
-                    <img src="https://www.fbi.gov/wanted/cyber/@@images/image/large" alt="Cyber Criminal">
-                    <h4>NIKOLAY MOLOTKOV</h4>
-                    <p>Ransomware Attacks</p>
-                    <p>Wanted for: Cyber Extortion</p>
+                    <img src="https://www.bleepstatic.com/content/hl-images/2021/05/10/Conti-header.jpg" alt="Conti">
+                    <h4>CONTI</h4>
+                    <p>Russian-based ransomware</p>
+                    <p>Specialty: Healthcare attacks</p>
+                    <p>Victims: 400+ organizations</p>
                 </div>
                 
                 <div class="fbi-card">
-                    <img src="https://www.fbi.gov/wanted/cyber/@@images/image/large" alt="Cyber Criminal">
-                    <h4>MATEUSZ SMAGA</h4>
-                    <p>International Hacking</p>
-                    <p>Wanted for: Computer Fraud</p>
+                    <img src="https://www.bleepstatic.com/content/hl-images/2021/04/21/REvil-header.jpg" alt="REvil">
+                    <h4>REVIL</h4>
+                    <p>Also known as Sodinokibi</p>
+                    <p>Specialty: Supply chain attacks</p>
+                    <p>Victims: Kaseya, JBS Foods</p>
                 </div>
                 
                 <div class="fbi-card">
-                    <img src="https://www.fbi.gov/wanted/cyber/@@images/image/large" alt="Cyber Criminal">
-                    <h4>DANIEL KAYI</h4>
-                    <p>Banking Malware</p>
-                    <p>Wanted for: Bank Fraud</p>
+                    <img src="https://www.bleepstatic.com/content/hl-images/2022/02/27/BlackCat-header.jpg" alt="BlackCat">
+                    <h4>BLACKCAT</h4>
+                    <p>Rust-written ransomware</p>
+                    <p>Specialty: Fast encryption</p>
+                    <p>Victims: 60+ organizations</p>
                 </div>
             </div>
         </div>
@@ -569,7 +584,8 @@
             const startTimes = {
                 timer1: Date.now(),
                 timer2: Date.now(),
-                timer3: Date.now()
+                timer3: Date.now(),
+                timer4: Date.now()
             };
             
             // Update all timers every second
