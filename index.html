@@ -3,683 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riko Leak - Data Breach Repository</title>
+    <title>Riko Lock - Under Maintenance</title>
     <style>
-        /* Global Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Courier New', monospace;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
         
         body {
-            background-color: #111;
-            color: #00ff41;
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="10" height="10" x="0" y="0" fill="%2300ff41" opacity="0.1"/></svg>');
-        }
-        
-        /* Terminal-like Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #111;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #00ff41;
-            border-radius: 4px;
-        }
-        
-        /* Header Styles */
-        header {
             background-color: #000;
-            border-bottom: 1px solid #00ff41;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00ff41;
-            letter-spacing: 2px;
-            color: #00ff41;
-        }
-        
-        .logo span {
-            color: #ff0000;
-            text-shadow: 0 0 10px #ff0000;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-        
-        nav ul li a {
-            color: #00ff41;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border: 1px solid transparent;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-        
-        nav ul li a:hover {
-            border: 1px solid #00ff41;
-            background-color: rgba(0, 255, 65, 0.1);
-            text-shadow: 0 0 5px #00ff41;
-        }
-        
-        /* Main Content Styles */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-        
-        .terminal {
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 1px solid #00ff41;
-            border-radius: 0;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-        }
-        
-        .terminal-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #00ff41;
-        }
-        
-        .terminal-btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 6px;
-            cursor: pointer;
-        }
-        
-        .terminal-btn.red {
-            background-color: #ff5f56;
-        }
-        
-        .terminal-btn.yellow {
-            background-color: #ffbd2e;
-        }
-        
-        .terminal-btn.green {
-            background-color: #27c93f;
-        }
-        
-        .terminal-title {
-            margin-left: 1rem;
-            font-size: 0.9rem;
-            color: #00ff41;
-        }
-        
-        .terminal-body {
-            min-height: 100px;
-        }
-        
-        .command-line {
-            display: flex;
-            margin-bottom: 0.5rem;
-        }
-        
-        .prompt {
-            color: #00ff41;
-            margin-right: 0.5rem;
-        }
-        
-        .output {
-            margin-bottom: 1rem;
-            color: #cccccc;
-        }
-        
-        /* Data Grid Styles */
-        .data-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .data-card {
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 1px solid #00ff41;
-            border-radius: 0;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .data-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            z-index: -1;
-            background: linear-gradient(45deg, #00ff41, #008f11, #00ff41);
-            background-size: 200% 200%;
-            animation: gradient 3s ease infinite;
-            opacity: 0.3;
-        }
-        
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .data-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.5);
-        }
-        
-        .data-card h3 {
-            color: #ff0000;
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 0.5rem;
-            text-shadow: 0 0 5px #ff0000;
-        }
-        
-        .data-card p {
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-        
-        .data-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 1rem;
-        }
-        
-        .target-timer {
-            color: #ff0000;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            text-shadow: 0 0 5px #ff0000;
-        }
-        
-        .get-data-btn {
-            background-color: #ff0000;
-            color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 0;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .get-data-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .get-data-btn:hover {
-            background-color: #cc0000;
-            color: #fff;
-            text-shadow: 0 0 5px #fff;
-        }
-        
-        .get-data-btn:hover::before {
-            left: 100%;
-        }
-        
-        .fbi-section {
-            margin-top: 3rem;
-            border-top: 1px solid #ff0000;
-            padding-top: 2rem;
-        }
-        
-        .fbi-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .fbi-badge {
-            background-color: #ff0000;
-            color: #fff;
-            padding: 0.3rem 0.6rem;
-            border-radius: 0;
-            font-weight: bold;
-            margin-right: 1rem;
-            font-size: 0.9rem;
-            text-shadow: 0 0 5px #fff;
-        }
-        
-        .fbi-wanted {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .fbi-card {
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 1px solid #ff0000;
-            border-radius: 0;
-            padding: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .fbi-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            z-index: -1;
-            background: linear-gradient(45deg, #ff0000, #8f0000, #ff0000);
-            background-size: 200% 200%;
-            animation: gradient 3s ease infinite;
-            opacity: 0.3;
-        }
-        
-        .fbi-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
-        }
-        
-        .fbi-card img {
-            width: 100%;
-            height: auto;
-            border-bottom: 1px solid #333;
-            margin-bottom: 0.5rem;
-        }
-        
-        .fbi-card h4 {
-            color: #fff;
-            margin-bottom: 0.3rem;
-            text-shadow: 0 0 5px #fff;
-        }
-        
-        .fbi-card p {
-            font-size: 0.8rem;
-            color: #ccc;
-        }
-        
-        /* Footer Styles */
-        footer {
-            background-color: #000;
-            border-top: 1px solid #00ff41;
-            padding: 1.5rem 2rem;
+            color: #00ff00;
+            font-family: 'Orbitron', sans-serif;
             text-align: center;
-            margin-top: 3rem;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
-        
-        footer p {
-            font-size: 0.8rem;
-            color: #666;
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
-        
-        /* LockBit-style elements */
-        .glitch-effect {
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-top: 20px;
+            animation: typing 4s steps(40) infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        @keyframes typing {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .glitch {
             position: relative;
+            display: inline-block;
         }
-        
-        .glitch-effect::before, .glitch-effect::after {
+
+        .glitch::before, .glitch::after {
             content: attr(data-text);
             position: absolute;
-            top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: #111;
-        }
-        
-        .glitch-effect::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff00ff;
-            animation: glitch-anim-1 2s infinite linear alternate-reverse;
-        }
-        
-        .glitch-effect::after {
-            left: -2px;
-            text-shadow: -2px 0 #00ffff;
-            animation: glitch-anim-2 2s infinite linear alternate-reverse;
-        }
-        
-        @keyframes glitch-anim-1 {
-            0% { clip: rect(85px, 9999px, 90px, 0); }
-            10% { clip: rect(25px, 9999px, 99px, 0); }
-            20% { clip: rect(64px, 9999px, 76px, 0); }
-            30% { clip: rect(91px, 9999px, 98px, 0); }
-            40% { clip: rect(30px, 9999px, 73px, 0); }
-            50% { clip: rect(91px, 9999px, 29px, 0); }
-            60% { clip: rect(98px, 9999px, 54px, 0); }
-            70% { clip: rect(42px, 9999px, 75px, 0); }
-            80% { clip: rect(75px, 9999px, 53px, 0); }
-            90% { clip: rect(67px, 9999px, 30px, 0); }
-            100% { clip: rect(79px, 9999px, 96px, 0); }
-        }
-        
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(95px, 9999px, 15px, 0); }
-            10% { clip: rect(55px, 9999px, 36px, 0); }
-            20% { clip: rect(49px, 9999px, 49px, 0); }
-            30% { clip: rect(23px, 9999px, 36px, 0); }
-            40% { clip: rect(56px, 9999px, 29px, 0); }
-            50% { clip: rect(39px, 9999px, 96px, 0); }
-            60% { clip: rect(97px, 9999px, 98px, 0); }
-            70% { clip: rect(11px, 9999px, 16px, 0); }
-            80% { clip: rect(52px, 9999px, 39px, 0); }
-            90% { clip: rect(23px, 9999px, 67px, 0); }
-            100% { clip: rect(99px, 9999px, 83px, 0); }
-        }
-        
-        .matrix-rain {
-            position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .glitch::before {
+            color: red;
+            animation: glitch 0.3s infinite alternate-reverse;
+        }
+
+        .glitch::after {
+            color: blue;
+            animation: glitch 0.3s infinite alternate;
+        }
+
+        @keyframes glitch {
+            0% { transform: translateX(-2px); }
+            100% { transform: translateX(2px); }
         }
     </style>
 </head>
 <body>
-    <div class="matrix-rain" id="matrixRain"></div>
-    
-    <header>
-        <div class="logo glitch-effect" data-text="RikoLeak">Riko<span>Leak</span></div>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#victims">Victims</a></li>
-                <li><a href="#groups">Ransomware Groups</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <div class="container" id="home">
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-btn red" id="red-btn"></div>
-                <div class="terminal-btn yellow"></div>
-                <div class="terminal-btn green"></div>
-                <div class="terminal-title">root@rikoleak:~</div>
-            </div>
-            <div class="terminal-body">
-                <div class="command-line">
-                    <span class="prompt">$</span>
-                    <span class="output">Welcome to Riko Leak</span>
-                </div>
-                <div class="output">
-                    <p>Data breach repository - Free downloads</p>
-                    <p>Total leaks: 4 | Last updated: Today</p>
-                </div>
-            </div>
-        </div>
-        
-        <h2 id="victims">Victims</h2>
-        <div class="data-grid">
-            <div class="data-card">
-                <h3>Adnanaswad.ae - Emirates Company</h3>
-                <p>Complete database dump from Adnanaswad.ae including employee records, financial data, and internal documents.</p>
-                <div class="data-meta">
-                    <span>Uploaded: 2023-11-20</span>
-                    <span>Size: 78MB</span>
-                </div>
-                <div class="target-timer" id="timer1">Time since added: 00:00:00</div>
-                <button class="get-data-btn" onclick="downloadData('https://files.catbox.moe/ku5m2n.zip')">DOWNLOAD LEAK</button>
-            </div>
-            
-            <div class="data-card">
-                <h3>Otosource.org - Organization Data</h3>
-                <p>Full database export from Otosource.org containing user accounts, transaction records, and internal communications.</p>
-                <div class="data-meta">
-                    <span>Uploaded: 2023-11-18</span>
-                    <span>Size: 112MB</span>
-                </div>
-                <div class="target-timer" id="timer2">Time since added: 00:00:00</div>
-                <button class="get-data-btn" onclick="downloadData('https://files.catbox.moe/6mg3nq.zip')">DOWNLOAD LEAK</button>
-            </div>
-            
-            <div class="data-card">
-                <h3>KBA.KRD - Kurdistan Data</h3>
-                <p>Comprehensive data leak from Kurdistan's government database including citizen records, financial transactions, and confidential documents.</p>
-                <div class="data-meta">
-                    <span>Uploaded: 2023-11-22</span>
-                    <span>Size: 245MB</span>
-                </div>
-                <div class="target-timer" id="timer3">Time since added: 00:00:00</div>
-                <button class="get-data-btn" onclick="downloadData('https://files.catbox.moe/xyv504.zip')">DOWNLOAD LEAK</button>
-            </div>
-            
-            <div class="data-card">
-                <h3>CityLink Express - Logistics Company</h3>
-                <p>Complete data breach of CityLink Express including customer databases, shipment records, financial transactions, and internal documents.</p>
-                <div class="data-meta">
-                    <span>Uploaded: 2023-11-25</span>
-                    <span>Size: 156MB</span>
-                </div>
-                <div class="target-timer" id="timer4">Time since added: 00:00:00</div>
-                <button class="get-data-btn" onclick="downloadData('https://files.catbox.moe/slc7an.zip')">DOWNLOAD LEAK</button>
-            </div>
-        </div>
-        
-        <div class="fbi-section" id="groups">
-            <div class="fbi-header">
-                <span class="fbi-badge">TOP</span>
-                <h2>Ransomware Groups</h2>
-            </div>
-            
-            <div class="fbi-wanted">
-                <div class="fbi-card">
-                    <img src="https://www.bleepstatic.com/content/hl-images/2021/06/02/LockBit.jpg" alt="LockBit">
-                    <h4>LOCKBIT</h4>
-                    <p>Most active ransomware group</p>
-                    <p>Specialty: Double extortion</p>
-                    <p>Victims: 1000+ organizations</p>
-                </div>
-                
-                <div class="fbi-card">
-                    <img src="https://www.bleepstatic.com/content/hl-images/2021/05/10/Conti-header.jpg" alt="Conti">
-                    <h4>CONTI</h4>
-                    <p>Russian-based ransomware</p>
-                    <p>Specialty: Healthcare attacks</p>
-                    <p>Victims: 400+ organizations</p>
-                </div>
-                
-                <div class="fbi-card">
-                    <img src="https://www.bleepstatic.com/content/hl-images/2021/04/21/REvil-header.jpg" alt="REvil">
-                    <h4>REVIL</h4>
-                    <p>Also known as Sodinokibi</p>
-                    <p>Specialty: Supply chain attacks</p>
-                    <p>Victims: Kaseya, JBS Foods</p>
-                </div>
-                
-                <div class="fbi-card">
-                    <img src="https://www.bleepstatic.com/content/hl-images/2022/02/27/BlackCat-header.jpg" alt="BlackCat">
-                    <h4>BLACKCAT</h4>
-                    <p>Rust-written ransomware</p>
-                    <p>Specialty: Fast encryption</p>
-                    <p>Victims: 60+ organizations</p>
-                </div>
-            </div>
-        </div>
-        
-        <h2 id="about">About Riko Leak</h2>
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-btn red"></div>
-                <div class="terminal-btn yellow"></div>
-                <div class="terminal-btn green"></div>
-                <div class="terminal-title">about@rikoleak:~</div>
-            </div>
-            <div class="terminal-body">
-                <div class="output">
-                    <p>Riko Leak is a data breach repository established in 2023.</p>
-                    <p>We provide free access to important data leaks for research purposes.</p>
-                    <p>All data is provided as-is without warranty.</p>
-                    <p class="glitch-effect" data-text="ACCESS AT YOUR OWN RISK">ACCESS AT YOUR OWN RISK</p>
-                </div>
-            </div>
-        </div>
+    <div class="container">
+        <h1 class="glitch" data-text="Riko Lock">Riko Lock</h1>
+        <p>System Under Heavy Maintenance...</p>
+        <p>We will be back stronger!</p>
     </div>
-    
-    <footer>
-        <p>Riko Leak &copy; 2023 | Access only through secure networks</p>
-        <p>TOR mirror: rikoleak.onion</p>
-    </footer>
-    
-<script>
-// Download function
-function downloadData(url) {
-    window.open(url, '_blank');
-}
-
-// Function to format time starting from 1 hour
-function formatTimeFromStart(startTime) {
-    const now = new Date();
-    const diff = now - startTime;
-    const totalSeconds = Math.floor(diff / 1000) + 3600; // Add 1 hour (3600 seconds)
-    
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    
-    return `Time since added: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-}
-
-// Initialize timers starting from 1 hour
-function startIndividualTimers() {
-    // Define the current time as start time for all timers
-    const startTime = new Date();
-    
-    // Update all timers every second
-    setInterval(() => {
-        for (let i = 1; i <= 4; i++) {
-            const timerElement = document.getElementById(`timer${i}`);
-            if (timerElement) {
-                timerElement.textContent = formatTimeFromStart(startTime);
-            }
-        }
-    }, 1000);
-    
-    // Initial update
-    for (let i = 1; i <= 4; i++) {
-        const timerElement = document.getElementById(`timer${i}`);
-        if (timerElement) {
-            timerElement.textContent = `Time since added: 01:00:00`;
-        }
-    }
-}
-
-// Red button functionality
-function setupRedButton() {
-    const redButton = document.getElementById('red-btn');
-    redButton.addEventListener('click', () => {
-        downloadData('https://files.catbox.moe/xyv504.zip');
-    });
-}
-
-// Matrix rain effect
-function setupMatrixRain() {
-    const canvas = document.createElement('canvas');
-    canvas.id = 'matrixCanvas';
-    document.getElementById('matrixRain').appendChild(canvas);
-    
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const nums = '0123456789';
-    
-    const alphabet = katakana + latin + nums;
-    
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    
-    const rainDrops = [];
-    
-    for (let x = 0; x < columns; x++) {
-        rainDrops[x] = 1;
-    }
-    
-    const draw = () => {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#00ff41';
-        ctx.font = fontSize + 'px monospace';
-        
-        for (let i = 0; i < rainDrops.length; i++) {
-            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-            
-            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                rainDrops[i] = 0;
-            }
-            rainDrops[i]++;
-        }
-    };
-    
-    setInterval(draw, 30);
-    
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    startIndividualTimers();
-    setupRedButton();
-    setupMatrixRain();
-});
-</script>
 </body>
 </html>
