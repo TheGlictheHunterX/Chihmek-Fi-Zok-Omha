@@ -8,8 +8,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
         
         body {
-            background-color: #000;
-            color: #00ff00;
+            background-color: #0a0a0a;
+            color: #00ff99;
             font-family: 'Orbitron', sans-serif;
             text-align: center;
             margin: 0;
@@ -22,27 +22,29 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
         }
 
         h1 {
-            font-size: 3em;
-            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            font-size: 3.5em;
+            text-shadow: 0 0 15px #00ff99, 0 0 30px #00ff99;
             animation: flicker 1.5s infinite alternate;
+            letter-spacing: 5px;
         }
 
         p {
-            font-size: 1.5em;
-            margin-top: 20px;
-            animation: typing 4s steps(40) infinite alternate;
+            font-size: 1.8em;
+            margin-top: 15px;
+            animation: typing 3s infinite alternate;
         }
 
         @keyframes flicker {
             0% { opacity: 1; }
-            100% { opacity: 0.6; }
+            100% { opacity: 0.7; }
         }
 
         @keyframes typing {
-            0% { opacity: 0.3; }
+            0% { opacity: 0.4; }
             100% { opacity: 1; }
         }
 
@@ -61,17 +63,46 @@
 
         .glitch::before {
             color: red;
-            animation: glitch 0.3s infinite alternate-reverse;
+            animation: glitch 0.2s infinite alternate-reverse;
         }
 
         .glitch::after {
-            color: blue;
-            animation: glitch 0.3s infinite alternate;
+            color: cyan;
+            animation: glitch 0.2s infinite alternate;
         }
 
         @keyframes glitch {
-            0% { transform: translateX(-2px); }
-            100% { transform: translateX(2px); }
+            0% { transform: translateX(-3px); }
+            100% { transform: translateX(3px); }
+        }
+
+        .warning {
+            font-size: 1.2em;
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+            margin-top: 20px;
+            animation: warningBlink 1s infinite alternate;
+        }
+
+        @keyframes warningBlink {
+            0% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border: 2px solid #00ff99;
+            width: 80%;
+            margin: 30px auto;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 1.2em;
+            box-shadow: 0 0 15px #00ff99;
+        }
+
+        .terminal span {
+            color: #ffcc00;
         }
     </style>
 </head>
@@ -79,7 +110,13 @@
     <div class="container">
         <h1 class="glitch" data-text="Riko Lock">Riko Lock</h1>
         <p>System Under Heavy Maintenance...</p>
-        <p>We will be back stronger!</p>
+        <p class="warning">Unauthorized access is strictly prohibited!</p>
+        <div class="terminal">
+            <p><span>Initializing security protocols...</span></p>
+            <p><span>Scanning for vulnerabilities...</span></p>
+            <p><span>Encrypting data...</span></p>
+            <p><span>Firewall status: ACTIVE</span></p>
+        </div>
     </div>
 </body>
 </html>
